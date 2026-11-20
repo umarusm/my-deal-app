@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USM VIP PORTAL // Updates & Subscriptions</title>
+<style>
+:root{--bg:#050508;--panel:rgba(18,19,30,.96);--elevated:#151724;--orange:#ff5e00;--amber:#ff9e00;--gold:#ffd000;--green:#16c75a;--red:#ff2a55;--white:#f5f7ff;--muted:#9aa0b8;--line:rgba(255,120,20,.4)}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Segoe UI,system-ui,Arial,sans-serif}
+body{background:radial-gradient(circle at 15% 10%,rgba(255,94,0,.18),transparent 42%),radial-gradient(circle at 85% 85%,rgba(255,208,0,.12),transparent 45%),var(--bg);color:var(--white);min-height:100vh;padding-bottom:40px}
+header{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#0b0c13;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px}.badge-line{width:9px;height:22px;background:linear-gradient(var(--gold),var(--orange));border-radius:3px}.brand-title{font-size:1rem;font-weight:900;letter-spacing:1px;color:var(--gold)}
+.header-controls{display:flex;align-items:center;gap:10px}.timer{display:none;padding:6px 10px;border-radius:99px;background:#16c75a22;border:1px solid var(--green);color:#6effa5;font-size:.72rem;font-weight:700}
+.dots{width:38px;height:38px;border-radius:10px;background:#ffffff10;border:1px solid #ffffff25;color:white;font-size:1.4rem;cursor:pointer}
+.container{max-width:980px;margin:24px auto;padding:0 16px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.media{height:175px;background:#0b0c12;display:flex;align-items:center;justify-content:center;color:var(--muted);overflow:hidden}.media img{width:100%;height:100%;object-fit:cover}
+.content{padding:15px;display:flex;flex-direction:column;gap:11px;flex:1}.content h3{color:var(--gold);font-size:1rem}.content p{color:var(--muted);font-size:.86rem;white-space:pre-wrap}.launch,.primary{display:block;width:100%;padding:11px;border:0;border-radius:10px;text-align:center;text-decoration:none;font-weight:850;color:#08080b;background:linear-gradient(90deg,var(--orange),var(--gold));cursor:pointer}
+.empty{grid-column:1/-1;text-align:center;padding:45px 20px;border:1px dashed #ff9e0055;border-radius:16px;color:var(--muted);background:var(--panel)}
+.lock{position:fixed;inset:61px 0 0;z-index:15;display:flex;justify-content:center;align-items:flex-start;padding:18px 14px;background:#05060bf5;overflow:auto}.lock.hidden{display:none}
+.modal{width:100%;max-width:440px;margin:auto;padding:22px 18px;border-radius:20px;background:#121420;border:1px solid var(--line);box-shadow:0 0 35px #ff5e0038;text-align:center}
+.tag{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:1.2px;color:var(--gold);background:#ffd0001f;border:1px solid #ffd00055;padding:4px 10px;border-radius:99px;margin-bottom:9px}
+.modal h2{font-size:1.22rem;margin-bottom:7px}.sub{font-size:.83rem;color:var(--muted);margin-bottom:16px;line-height:1.5}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:15px}.plan{position:relative;padding:15px 8px;border-radius:14px;background:#0c0e18;border:1.5px solid #ffffff25;color:white;cursor:pointer}.plan.active{border-color:var(--orange);background:#ff5e0028}.plan b{display:block;font-size:.9rem}.amount{display:block;color:var(--gold);font-size:1.3rem;font-weight:900;margin:5px}.period{font-size:.74rem;color:var(--muted)}.popular{position:absolute;right:8px;top:-9px;background:linear-gradient(90deg,var(--orange),var(--gold));color:#08080b;padding:2px 7px;border-radius:5px;font-size:.6rem;font-weight:900}
+.panel{display:none;text-align:left;padding:14px;border-radius:14px;background:#0c0f1a;border:1px solid #ff9e0070}.panel.show{display:block}
+.gate-top,.rowline{display:flex;justify-content:space-between;align-items:center;gap:10px}.gate-top{padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid #ffffff20}.gate-title{font-weight:800;color:var(--gold)}.price-badge{background:var(--gold);color:#07070b;padding:4px 8px;border-radius:6px;font-size:.75rem;font-weight:900}
+label{display:block;color:var(--muted);font-size:.77rem;margin:9px 0 5px}.field{width:100%;padding:11px;border-radius:9px;border:1px solid #ffd00066;background:#080910;color:white;font-size:.9rem;outline:none}.field:focus{border-color:var(--gold)}
+.code-row{display:flex;gap:8px}.code-row .field{flex:1;min-width:0}.smallbtn{padding:10px 12px;border:1px solid var(--gold);border-radius:9px;background:#ffd00020;color:var(--gold);font-weight:800;cursor:pointer}
+.greenbtn{width:100%;padding:11px;border:1px solid #16c75a88;border-radius:9px;background:#16c75a20;color:#65f79b;font-weight:850;cursor:pointer}
+.epbox{margin-top:11px;padding:12px;border-radius:11px;background:#091710;border:1px solid #16c75a77}.account{display:flex;justify-content:space-between;align-items:center;gap:8px;background:#06100b;padding:10px;border-radius:8px;margin:8px 0}.account strong{font-size:.92rem}.copy{border:0;border-radius:6px;background:var(--green);padding:6px 9px;font-weight:800;cursor:pointer}
+.back{display:block;width:100%;margin-top:10px;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;padding:6px}
+.notice{font-size:.78rem;color:var(--muted);line-height:1.45;margin-top:9px}.status{min-height:18px;margin-top:9px;font-size:.8rem;color:var(--gold);text-align:center}
+.admin-backdrop{display:none;position:fixed;inset:0;z-index:40;justify-content:center;align-items:center;padding:14px;background:#000d}.admin-backdrop.open{display:flex}.admin{width:100%;max-width:560px;max-height:90vh;overflow:auto;padding:18px;border-radius:17px;background:var(--elevated);border:1px solid var(--orange)}
+.admin-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #ffffff22}.admin-head h2{color:var(--gold);font-size:1rem}.close{width:31px;height:31px;border-radius:50%;border:1px solid #ffffff30;background:#ffffff10;color:white;cursor:pointer}
+.admin-section{padding:12px 0;border-bottom:1px solid #ffffff1c}.admin-section h3{color:var(--amber);font-size:.82rem;margin-bottom:9px}.admin .field{margin-bottom:8px;border-color:#ffffff30}.admin-actions{display:flex;gap:8px;flex-wrap:wrap}.admin-actions button{flex:1;min-width:120px}.good{background:var(--green);color:#051109;border:0}.danger{background:var(--red);color:white;border:0}.outline{background:#ffd00015;color:var(--gold);border:1px solid var(--gold)}.admin-item{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px;margin:6px 0;background:#0d0e17;border-radius:8px;font-size:.8rem}.admin-item span{overflow-wrap:anywhere}.hidden{display:none!important}
+@media(max-width:420px){.brand-title{font-size:.88rem}.timer{font-size:.65rem;padding:5px 7px}.modal{padding:18px 14px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand"><div class="badge-line"></div><div class="brand-title">USM VIP PORTAL</div></div>
+ <div class="header-controls"><div class="timer" id="countdown">00d 00h 00m 00s</div><button class="dots" id="menuBtn" type="button" aria-label="Admin menu">⋮</button></div>
+</header>
+
+<main class="container"><div class="grid" id="productGrid"></div></main>
+
+<section class="lock" id="subscriptionWall">
+ <div class="modal">
+  <div id="chooseView">
+   <span class="tag">Subscription Required</span>
+   <h2>Unlock Updates &amp; VIP Links</h2>
+   <p class="sub">Select a plan, then continue with a one-time secret code or submit your Easypaisa transaction ID for manual approval.</p>
+   <div class="plans">
+    <button class="plan active" id="weekly" type="button" data-plan="weekly"><b>Weekly Pass</b><span class="amount">Rs. 100</span><span class="period">7 Days Access</span></button>
+    <button class="plan" id="monthly" type="button" data-plan="monthly"><span class="popular">PRO</span><b>Monthly Pass</b><span class="amount">Rs. 500</span><span class="period">30 Days Access</span></button>
+   </div>
+   <button class="primary" id="buyOk" type="button">Buy &amp; OK</button>
+  </div>
+
+  <div class="panel" id="codeView">
+   <div class="gate-top"><span class="gate-title" id="gateTitle">Weekly Pass</span><span class="price-badge" id="gatePrice">Rs. 100 • 7d</span></div>
+   <label for="secretCode">Enter One-Time Secret Code</label>
+   <div class="code-row"><input class="field" id="secretCode" placeholder="ENTER CODE" autocomplete="off"><button class="smallbtn" id="redeem" type="button">Redeem</button></div>
+   <button class="greenbtn" id="showPayment" type="button">Pay via Easypaisa</button>
+   <div class="epbox hidden" id="paymentBox">
+    <div class="notice">Send the exact plan amount to the Easypaisa account configured by the portal owner. Then submit your transaction ID. Access remains locked until the admin verifies the payment.</div>
+    <div class="account"><div><div class="notice">Easypaisa account / number</div><strong id="epAccount">Not configured</strong></div><button class="copy" id="copyAccount" type="button">Copy</button></div>
+    <label for="payerName">Your name (optional)</label><input class="field" id="payerName" placeholder="Name">
+    <label for="tid">Transaction ID (TID)</label><input class="field" id="tid" placeholder="Enter transaction ID">
+    <button class="greenbtn" id="submitPayment" type="button">Submit for Approval</button>
+   </div>
+   <button class="back" id="backPlans" type="button">← Back to plans</button>
+   <div class="status" id="gateStatus" role="status"></div>
+  </div>
+ </div>
+</section>
+
+<div class="admin-backdrop" id="adminBackdrop">
+ <div class="admin">
+  <div class="admin-head"><h2>USM VIP — Admin Panel</h2><button class="close" id="closeAdmin" type="button">×</button></div>
+  <div id="adminLogin">
+   <p class="notice">Enter the admin password to manage portal content. This standalone HTML demo is not secure for public deployment.</p>
+   <label for="adminPassword">Admin password</label><input class="field" id="adminPassword" type="password" placeholder="Password">
+   <button class="primary" id="loginAdmin" type="button">Login</button><div class="status" id="loginStatus"></div>
+  </div>
+  <div id="adminTools" class="hidden">
+   <div class="admin-section">
+    <h3>Portal payment settings</h3>
+    <label for="epNumber">Easypaisa account / number</label><input class="field" id="epNumber" placeholder="Enter your Easypaisa account details">
+    <label for="newAdminPassword">Change demo admin password</label><input class="field" id="newAdminPassword" type="password" placeholder="New password (optional)">
+    <button class="smallbtn" id="saveSettings" type="button">Save Settings</button>
+   </div>
+   <div class="admin-section">
+    <h3>Add update / VIP link</h3>
+    <input class="field" id="itemTitle" placeholder="Title">
+    <input class="field" id="itemDesc" placeholder="Description">
+    <input class="field" id="itemUrl" placeholder="https://example.com">
+    <input class="field" id="itemImage" placeholder="Image URL (optional)">
+    <button class="primary" id="addItem" type="button">Add to Portal</button>
+    <div id="itemList"></div>
+   </div>
+   <div class="admin-section">
+    <h3>Create one-time secret code</h3>
+    <select class="field" id="codePlan"><option value="weekly">Weekly — Rs. 100 / 7 days</option><option value="monthly">Monthly — Rs. 500 / 30 days</option></select>
+    <button class="smallbtn" id="generateCode" type="button">Generate Code</button><div id="codeList"></div>
+   </div>
+   <div class="admin-section">
+    <h3>Payment requests — manual verification required</h3><div id="paymentList" class="notice">No requests.</div>
+   </div>
+   <div class="admin-section">
+    <h3>Backup</h3><div class="admin-actions"><button class="smallbtn outline" id="exportData" type="button">Export JSON Backup</button><button class="smallbtn danger" id="logoutAdmin" type="button">Logout</button></div>
+   </div>
+  </div>
+ </div>
+</div>
+
+<script>
+(() => {
+'use strict';
+const $ = id => document.getElementById(id);
+const KEY = 'usmVipPortalData_v1';
+const DEFAULTS = {items:[],codes:[],payments:[],settings:{epAccount:'',adminPassword:'123456'},subscription:null};
+let data;
+try { data = JSON.parse(localStorage.getItem(KEY)) || null; } catch (_) { data = null; }
+if (!data || typeof data !== 'object') data = structuredCloneSafe(DEFAULTS);
+data = {...DEFAULTS,...data,settings:{...DEFAULTS.settings,...(data.settings||{})}};
+function structuredCloneSafe(x){return JSON.parse(JSON.stringify(x));}
+function save(){localStorage.setItem(KEY,JSON.stringify(data));}
+let selectedPlan='weekly';
+const plans={weekly:{name:'Weekly Pass',price:100,days:7},monthly:{name:'Monthly Pass',price:500,days:30}};
+function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function setStatus(msg){$('gateStatus').textContent=msg;}
+function selectPlan(plan){selectedPlan=plan; $('weekly').classList.toggle('active',plan==='weekly');$('monthly').classList.toggle('active',plan==='monthly');}
+$('weekly').addEventListener('click',()=>selectPlan('weekly'));
+$('monthly').addEventListener('click',()=>selectPlan('monthly'));
+$('buyOk').addEventListener('click',()=>{
+ const p=plans[selectedPlan];$('chooseView').classList.add('hidden');$('codeView').classList.add('show');
+ $('gateTitle').textContent=p.name;$('gatePrice').textContent=`Rs. ${p.price} • ${p.days}d`;
+ $('epAccount').textContent=data.settings.epAccount||'Not configured by admin';
+ $('secretCode').value='';$('tid').value='';$('paymentBox').classList.add('hidden');setStatus('');
+});
+$('backPlans').addEventListener('click',()=>{$('codeView').classList.remove('show');$('chooseView').classList.remove('hidden');setStatus('');});
+$('redeem').addEventListener('click',()=>{
+ const entered=$('secretCode').value.trim().toUpperCase();
+ if(!entered){setStatus('Please enter your secret code.');return;}
+ const record=data.codes.find(c=>c.code===entered);
+ if(!record){setStatus('Invalid secret code.');return;}
+ if(record.used){setStatus('This code has already been used.');return;}
+ if(record.plan!==selectedPlan){setStatus('This code is for a different subscription plan.');return;}
+ record.used=true;record.usedAt=Date.now();activate(record.plan);save();setStatus('Code accepted. Subscription activated!');
+});
+$('showPayment').addEventListener('click',()=>{$('paymentBox').classList.toggle('hidden');$('epAccount').textContent=data.settings.epAccount||'Not configured by admin';});
+$('copyAccount').addEventListener('click',async()=>{
+ const value=data.settings.epAccount||'';
+ if(!value){setStatus('Admin has not configured the Easypaisa account yet.');return;}
+ try{await navigator.clipboard.writeText(value);setStatus('Account details copied.');}catch(_){setStatus('Copy is unavailable; please copy the account details manually.');}
+});
+$('submitPayment').addEventListener('click',()=>{
+ const tid=$('tid').value.trim();if(tid.length<4){setStatus('Please enter a valid transaction ID.');return;}
+ if(!data.settings.epAccount){setStatus('Easypaisa account is not configured yet. Contact the portal admin.');return;}
+ data.payments.push({id:'PAY-'+Date.now(),plan:selectedPlan,name:$('payerName').value.trim(),tid,submittedAt:Date.now(),status:'pending'});
+ save();$('tid').value='';setStatus('Request submitted. Admin must verify the payment before access is activated.');
+});
+function activate(plan){
+ const until=Date.now()+plans[plan].days*86400000;data.subscription={plan,until};save();renderAccess();
+}
+function renderAccess(){
+ const valid=data.subscription&&data.subscription.until>Date.now();
+ $('subscriptionWall').classList.toggle('hidden',!!valid);
+ $('countdown').style.display=valid?'block':'none';
+ if(valid) updateTimer();
+}
+function updateTimer(){
+ if(!data.subscription||data.subscription.until<=Date.now()){data.subscription=null;save();renderAccess();return;}
+ let ms=data.subscription.until-Date.now();const d=Math.floor(ms/86400000);ms%=86400000;const h=Math.floor(ms/3600000);ms%=3600000;const m=Math.floor(ms/60000);const s=Math.floor(ms/1000)%60;
+ $('countdown').textContent=`${String(d).padStart(2,'0')}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+}
+function renderItems(){
+ const grid=$('productGrid');
+ if(!data.items.length){grid.innerHTML='<div class="empty">VIP updates and links will appear here after the admin adds them.</div>';return;}
+ grid.innerHTML=data.items.map((item,i)=>`<article class="card"><div class="media">${item.image?`<img src="${escapeHtml(item.image)}" alt="" onerror="this.remove()">`:'VIP UPDATE'}</div><div class="content"><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.desc)}</p><a class="launch" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">OPEN LINK</a></div></article>`).join('');
+}
+$('menuBtn').addEventListener('click',()=>{$('adminBackdrop').classList.add('open');$('adminLogin').classList.remove('hidden');$('adminTools').classList.add('hidden');$('adminPassword').value='';$('loginStatus').textContent='';});
+$('closeAdmin').addEventListener('click',()=>$('adminBackdrop').classList.remove('open'));
+$('adminBackdrop').addEventListener('click',e=>{if(e.target===$('adminBackdrop'))$('adminBackdrop').classList.remove('open');});
+$('loginAdmin').addEventListener('click',()=>{
+ if($('adminPassword').value!==data.settings.adminPassword){$('loginStatus').textContent='Incorrect password.';return;}
+ $('adminLogin').classList.add('hidden');$('adminTools').classList.remove('hidden');renderAdmin();
+});
+$('logoutAdmin').addEventListener('click',()=>{$('adminTools').classList.add('hidden');$('adminLogin').classList.remove('hidden');$('adminPassword').value='';});
+function renderAdmin(){
+ $('epNumber').value=data.settings.epAccount||'';
+ $('itemList').innerHTML=data.items.length?data.items.map((x,i)=>`<div class="admin-item"><span>${escapeHtml(x.title)}</span><button class="smallbtn danger" data-remove-item="${i}">Remove</button></div>`).join(''):'<p class="notice">No portal links added.</p>';
+ $('codeList').innerHTML=data.codes.length?data.codes.map(c=>`<span class="admin-item"><span>${escapeHtml(c.code)} — ${c.plan} ${c.used?'(USED)':''}</span></span>`).join(''):'<p class="notice">No codes generated.</p>';
+ $('paymentList').innerHTML=data.payments.length?data.payments.map((p,i)=>`<div class="admin-item"><span><b>${escapeHtml(p.plan)}</b> · ${escapeHtml(p.name||'Customer')}<br>TID: ${escapeHtml(p.tid)}<br>Status: ${escapeHtml(p.status)}</span>${p.status==='pending'?`<button class="smallbtn good" data-approve="${i}">Approve</button>`:''}</div>`).join(''):'<p class="notice">No payment requests.</p>';
+}
+$('saveSettings').addEventListener('click',()=>{
+ data.settings.epAccount=$('epNumber').value.trim();
+ const pass=$('newAdminPassword').value.trim();if(pass)data.settings.adminPassword=pass;
+ save();$('newAdminPassword').value='';$('epAccount').textContent=data.settings.epAccount||'Not configured';alert('Settings saved on this device.');
+});
+$('addItem').addEventListener('click',()=>{
+ const title=$('itemTitle').value.trim(),desc=$('itemDesc').value.trim(),url=$('itemUrl').value.trim(),image=$('itemImage').value.trim();
+ if(!title||!url){alert('Please enter a title and link.');return;}
+ try{const u=new URL(url);if(!['http:','https:'].includes(u.protocol))throw Error();}catch(_){alert('Enter a valid http:// or https:// link.');return;}
+ if(image){try{const im=new URL(image);if(!['http:','https:'].includes(im.protocol))throw Error();}catch(_){alert('Image must be a valid http:// or https:// URL.');return;}}
+ data.items.push({title,desc,url,image});save();$('itemTitle').value=$('itemDesc').value=$('itemUrl').value=$('itemImage').value='';renderItems();renderAdmin();
+});
+$('itemList').addEventListener('click',e=>{
+ const b=e.target.closest('[data-remove-item]');if(!b)return;data.items.splice(Number(b.dataset.removeItem),1);save();renderItems();renderAdmin();
+});
+$('generateCode').addEventListener('click',()=>{
+ const plan=$('codePlan').value;let code;
+ do{code='USM-'+Math.random().toString(36).slice(2,6).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase();}while(data.codes.some(c=>c.code===code));
+ data.codes.push({code,plan,used:false,createdAt:Date.now()});save();renderAdmin();
+ if(navigator.clipboard?.writeText)navigator.clipboard.writeText(code).catch(()=>{});
+ alert('New code: '+code+'\nCopy and send it to the customer securely.');
+});
+$('paymentList').addEventListener('click',e=>{
+ const b=e.target.closest('[data-approve]');if(!b)return;
+ const p=data.payments[Number(b.dataset.approve)];if(!p||p.status!=='pending')return;
+ if(!confirm('Have you checked this payment in your Easypaisa account and confirmed the amount?'))return;
+ p.status='approved';p.verifiedAt=Date.now();activate(p.plan);renderAdmin();alert('Marked approved and activated on this device. For a real customer portal, approval must happen on a secure server.');
+});
+$('exportData').addEventListener('click',()=>{
+ const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='usm-vip-portal-backup.json';a.click();URL.revokeObjectURL(a.href);
+});
+renderItems();renderAccess();setInterval(updateTimer,1000);
+})();
+</script>
+</body>
+</html>
